@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.header {
+    display: flex;
+    gap: 24px;
+    padding: 8px 24px;
+    /*background-color: beige;*/
+    border-bottom: 1px solid #dce0e0;
+    height: 64px;
+}
+
+.header-icons-grp {
+    display: flex;
+    gap: 20px;
+    min-width: 120px;
+    justify-content: center;
+}
+
+.page-title-container {
+    display: flex;
+    gap: 16px;
+    height: 48px;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.page-logo, .menu-icon, .profile-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 32px;
+}
+
+

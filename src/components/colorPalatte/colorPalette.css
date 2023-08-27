@@ -1,0 +1,21 @@
+.color-palette {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    padding: 8px;
+    gap: 4px;
+    border: 1px solid grey;
+    border-radius: 8px;
+    width: fit-content;
+}
+
+.color-palette button {
+    width: 28px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px solid grey;
+}
+
+.color-palette button:hover {
+    border: 1px solid black;
+}

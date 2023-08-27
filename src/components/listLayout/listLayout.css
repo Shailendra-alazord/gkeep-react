@@ -1,0 +1,133 @@
+/*@tailwind base;*/
+/*@tailwind components;*/
+/*@tailwind utilities;*/
+
+.list-layout-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /*height: 100%;*/
+    margin: 0 auto;
+    padding: 8px 50px;
+    width: 700px;
+
+
+}
+
+.list-layout-container > div {
+    margin-left: 16px;
+    font-size: small;
+}
+
+.list-note-container {
+    display: flex;
+    border: 1px solid lightgray;
+    border-radius: 8px;
+
+}
+
+.list-note {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 16px 0 8px 0;
+    min-height: 120px;
+    gap: 4px;
+    font-family: "Google Sans", Roboto, Arial, sans-serif
+
+}
+
+
+.list-note-title {
+    font-size: 18px;
+}
+
+.hover-icons-bottom {
+    height: 32px;
+}
+
+.list-note-body {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    min-height: 60px;
+    height: fit-content;
+}
+
+
+.list-note-icons {
+    display: none;
+}
+
+.tick-icon, .pin-icon {
+    display: none;
+}
+
+.hover-icons {
+    display: none;
+}
+
+.tick-icon-container {
+    width: 32px;
+    height: fit-content;
+    margin-left: -16px;
+    margin-top: -8px;
+    display: flex;
+    justify-content: center;
+}
+
+.pin-icon-container {
+    width: 32px;
+    margin-right: 8px;
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+    height: fit-content;
+}
+
+.list-note-container:hover {
+    box-shadow: 0 0 4px grey;
+
+    .hover-icons {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        height: 100%;
+    }
+
+    .hover-icons > button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 36px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+    }
+
+    .pin-icon, .tick-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .pin-icon {
+        width: 60px;
+        aspect-ratio: 1;
+    }
+}
+
+.pin-icon:hover {
+    /*border: 2px solid black;*/
+
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+}
+
+.hover-icons > button:hover {
+
+    background-color: rgba(0, 0, 0, 0.1);
+
+}
+
+.list-layout-container.others {
+    margin-top: 40px;
+}

@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.create-note-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 600px;
+    margin: 48px auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px grey;
+}
+
+.title-desc-label {
+    display: flex;
+    width: 100%;
+    padding: 12px 16px;
+    gap: 24px;
+    font-weight: 500;
+}
+
+
+.create-note-title {
+    flex-grow: 1;
+    outline: none;
+}
+
+.create-note-desc {
+    padding: 4px 16px;
+    min-height: 60px;
+    height: 100%;
+    font-size: 14px;
+    font-weight: 500;
+    /*overflow: ;*/
+    width: 100%;
+    resize: none;
+}
+
+.create-note-desc:focus {
+    outline: none;
+}
+
+.create-note-desc:empty::before {
+    color: grey;
+}
+
+
+.create-note-pin-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.create-note-pin-icon:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.icon-container {
+    display: flex;
+    padding-left: 16px;
+    gap: 16px;
+    align-items: center;
+    /*background-color: grey;*/
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.icon-container button {
+    display: flex;
+    min-width: 40px;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1;
+}
+
+.icon-container button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+}
+
+#close-btn {
+    padding: 4px 16px;
+    font-weight: 500;
+    color: grey;
+    margin-left: auto;
+    margin-right: 40px;
+    height: 40px;
+    width: 80px;
+}
+
+#close-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
