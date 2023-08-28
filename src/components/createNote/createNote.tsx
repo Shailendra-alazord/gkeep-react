@@ -12,7 +12,7 @@ import {
   PINICON,
   UNPINICON,
 } from '@/utils/constants';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { NoteListContext } from '@/Providers/noteListProvider';
 import ColorPalette from '@/components/colorPalatte/colorPalette';
 import { NoteColorContext } from '@/Providers/noteColorProvider';
@@ -25,6 +25,7 @@ export default function CreateNote() {
   const [paletteOn, setPaletteOn] = useState(false);
   // @ts-ignore
   const [noteList, setNoteList] = useContext(NoteListContext);
+  const formRef = useRef(null);
 
   function handleChange(event: any) {
     setNote({ ...note, title: event.target.value });
@@ -34,14 +35,11 @@ export default function CreateNote() {
     setNote({ ...note, body: event.target.value });
   }
 
-  function handleSubmit(event: any) {
-    event.preventDefault();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  function submitNote() {
     const newNote = {
-      title: event.target.title.value,
-      body: event.target.body.value,
+      ...note,
       id: Date.now().toString(),
-      pinned: note.pinned,
-      backgroundColor: note.backgroundColor,
     };
     if (newNote.title === '' && newNote.body === '') {
       setNote({ title: '', body: '', id: '', pinned: false, backgroundColor: '#FFFFFF' });
@@ -53,6 +51,11 @@ export default function CreateNote() {
     localStorage.setItem('noteList', JSON.stringify(newNoteList));
     setNote({ title: '', body: '', id: '', pinned: false, backgroundColor: '#FFFFFF' });
     setFocus(false);
+  }
+
+  function handleSubmit(event: any) {
+    event.preventDefault();
+    submitNote();
   }
 
   function handlePinClick(event: any) {
@@ -69,12 +72,24 @@ export default function CreateNote() {
     event.preventDefault();
   }
 
+  useEffect(() => {
+    function handleClickOutside(event: any) {
+      //@ts-ignore
+      if (formRef.current && !formRef.current.contains(event.target)) {
+        submitNote();
+      }
+    }
+
+    document.addEventListener('click', handleClickOutside, true);
+    return () => document.removeEventListener('click', handleClickOutside, true);
+  }, [submitNote]);
   return (
     <form
       className="create-note-container"
       onFocus={() => setFocus(true)}
       onSubmit={handleSubmit}
-      style={{ backgroundColor: note.backgroundColor }}
+      style={{ backgroundColor: focus && note.backgroundColor }}
+      ref={formRef}
     >
       {focus ? (
         <>

@@ -15,6 +15,7 @@
 
 .modal-container input, textarea {
     outline: none;
+    background-color: transparent;
 }
 
 .modal-form {
@@ -71,7 +72,7 @@
 
 }
 
-.bottom-icons button {
+.bottom-icons > button {
     display: flex;
     justify-content: center;
     align-items: center;
