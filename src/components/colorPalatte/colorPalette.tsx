@@ -2,6 +2,7 @@
 import './colorPalette.css';
 import { useContext, useState } from 'react';
 import { NoteColorContext } from '@/Providers/noteColorProvider';
+import { DisplayContext } from '@/Providers/DisplayProvider';
 
 const colorList = [
   { name: 'default', code: '#FFFFFF' },
@@ -21,6 +22,8 @@ export default function ColorPalette({ ...props }) {
   const [currentColor, setCurrentColor] = useState('');
   // @ts-ignore
   const [note, setNote] = useContext(NoteColorContext);
+  // @ts-ignore
+  const [, , , , modalNote, setModalNote] = useContext(DisplayContext);
 
   function handleEntry(color: string) {
     setHovered(true);
@@ -34,6 +37,7 @@ export default function ColorPalette({ ...props }) {
   function handleClick(event: any, color: string) {
     event.preventDefault();
     setNote({ ...note, backgroundColor: color });
+    setModalNote({ ...modalNote, backgroundColor: color });
   }
 
   return (

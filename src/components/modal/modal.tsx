@@ -2,25 +2,22 @@
 import './modal.css';
 import Image from 'next/image';
 import { ALERTICON, COLLABORATORICON, MOREICON, PALETTEICON, PHOTOICON, PINICON, UNPINICON } from '@/utils/constants';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { NoteListContext } from '@/Providers/noteListProvider';
 import { DisplayContext } from '@/Providers/DisplayProvider';
 import ColorPalette from '@/components/colorPalatte/colorPalette';
-import { NoteColorContext } from '@/Providers/noteColorProvider';
 
 const ICONLIST = [ALERTICON, COLLABORATORICON, PALETTEICON, PHOTOICON, MOREICON];
 // @ts-ignore
-export default function Modal({ currentNote, ...props }) {
+export default function Modal({ ...props }) {
   // @ts-ignore
   const [noteList, setNoteList] = useContext(NoteListContext);
-  const [modalNote, setModalNote] = useState(currentNote ?? { title: '', body: '', id: '', pinned: true });
   // @ts-ignore
-  const [note] = useContext(NoteColorContext);
+  const [, , , , modalNote, setModalNote] = useContext(DisplayContext);
+  // @ts-ignore
   const [paletteOn, setPaletteOn] = useState(false);
   // @ts-ignore
   const [, , , seIsModalOpen] = useContext(DisplayContext);
-
-  console.log('rendered', note.backgroundColor);
 
   function handleChangeTitle(event: any) {
     setModalNote({ ...modalNote, title: event.target.value });
@@ -56,11 +53,6 @@ export default function Modal({ currentNote, ...props }) {
   function handlePaletteClick() {
     setPaletteOn(!paletteOn);
   }
-
-  useEffect(() => {
-    console.log(note);
-    setModalNote({ ...modalNote, backgroundColor: note.backgroundColor });
-  }, [note.backgroundColor]);
 
   return (
     <div className="modal-container">

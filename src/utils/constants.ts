@@ -24,3 +24,4 @@ export const DELETEICON = { src: '/icons/delete.svg', name: 'delete' };
 export const MOREICON = { src: '/icons/more.svg', name: 'more' };
 
 export const UNPINICON = { src: '/icons/unpin.svg', name: 'unpin' };
+export const DEFAULTNOTE = { title: '', body: '', id: '', pinned: false, backgroundColor: '#FFFFFF' };

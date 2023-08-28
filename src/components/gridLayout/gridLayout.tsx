@@ -22,10 +22,10 @@ export default function GridLayout() {
   // @ts-ignore
   const [noteList, setNoteList] = useContext(NoteListContext);
   // @ts-ignore
-  const [, , , setIsModalOpen, , setCurrentNote] = useContext(DisplayContext);
+  const [, , , setIsModalOpen, , setModalNote] = useContext(DisplayContext);
 
   function openModal(note: any) {
-    setCurrentNote(note);
+    setModalNote(note);
     setIsModalOpen(true);
   }
 

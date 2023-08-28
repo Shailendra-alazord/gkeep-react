@@ -14,7 +14,6 @@ export default function Main() {
   // @ts-ignore
   const [isListLayout, , isModalOpen] = useContext(DisplayContext);
   // @ts-ignore
-  const [, , , , currentNote] = useContext(DisplayContext);
   return (
     <NoteListProvider>
       <NoteColorProvider>
@@ -22,7 +21,7 @@ export default function Main() {
         <main className="home">
           <CreateNote />
           {isListLayout ? <ListLayout /> : <GridLayout />}
-          {isModalOpen && <Modal currentNote={currentNote} />}
+          {isModalOpen && <Modal />}
         </main>
       </NoteColorProvider>
     </NoteListProvider>
