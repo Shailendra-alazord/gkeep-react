@@ -43,7 +43,11 @@ export default function ListLayout() {
         <div>PINNED</div>
         {noteList.map((note: any, key: any) => {
           return note.pinned ? (
-            <pre className={`list-note-container ${key}`} key={note.title + key}>
+            <pre
+              className={`list-note-container ${key}`}
+              key={note.title + key}
+              style={{ backgroundColor: note.backgroundColor }}
+            >
               <div className="tick-icon-container">
                 <button className="tick-icon">
                   <Image src={TICKICON.src} alt={TICKICON.name} width={24} height={24} />
@@ -90,7 +94,11 @@ export default function ListLayout() {
         <div>OTHERS</div>
         {noteList.map((note: any, key: any) => {
           return !note.pinned ? (
-            <pre className={`list-note-container ${key}`} key={note.title + key}>
+            <pre
+              className={`list-note-container ${key}`}
+              key={note.title + key}
+              style={{ backgroundColor: note.backgroundColor }}
+            >
               <div className="tick-icon-container">
                 <button className="tick-icon">
                   <Image src={TICKICON.src} alt={TICKICON.name} width={24} height={24} />

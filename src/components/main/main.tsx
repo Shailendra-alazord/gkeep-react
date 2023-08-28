@@ -8,6 +8,7 @@ import GridLayout from '@/components/gridLayout/gridLayout';
 import NoteListProvider from '@/Providers/noteListProvider';
 import Modal from '@/components/modal/modal';
 import Header from '@/components/header/header';
+import NoteColorProvider from '@/Providers/noteColorProvider';
 
 export default function Main() {
   // @ts-ignore
@@ -16,12 +17,14 @@ export default function Main() {
   const [, , , , currentNote] = useContext(DisplayContext);
   return (
     <NoteListProvider>
-      <Header />
-      <main className="home">
-        <CreateNote />
-        {isListLayout ? <ListLayout /> : <GridLayout />}
-        {isModalOpen && <Modal currentNote={currentNote} />}
-      </main>
+      <NoteColorProvider>
+        <Header />
+        <main className="home">
+          <CreateNote />
+          {isListLayout ? <ListLayout /> : <GridLayout />}
+          {isModalOpen && <Modal currentNote={currentNote} />}
+        </main>
+      </NoteColorProvider>
     </NoteListProvider>
   );
 }

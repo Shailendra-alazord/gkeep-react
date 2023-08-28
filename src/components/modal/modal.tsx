@@ -5,6 +5,7 @@ import { ALERTICON, COLLABORATORICON, MOREICON, PALETTEICON, PHOTOICON, PINICON,
 import { useContext, useState } from 'react';
 import { NoteListContext } from '@/Providers/noteListProvider';
 import { DisplayContext } from '@/Providers/DisplayProvider';
+import ColorPalette from '@/components/colorPalatte/colorPalette';
 
 const ICONLIST = [ALERTICON, COLLABORATORICON, PALETTEICON, PHOTOICON, MOREICON];
 // @ts-ignore
@@ -12,6 +13,7 @@ export default function Modal({ currentNote, ...props }) {
   // @ts-ignore
   const [noteList, setNoteList] = useContext(NoteListContext);
   const [note, setNote] = useState(currentNote ?? { title: '', body: '', id: '', pinned: true });
+  const [paletteOn, setPaletteOn] = useState(false);
   // @ts-ignore
   const [, , , seIsModalOpen] = useContext(DisplayContext);
 
@@ -46,6 +48,8 @@ export default function Modal({ currentNote, ...props }) {
     event.preventDefault();
   }
 
+  function handlePaletteClick() {}
+
   return (
     <div className="modal-container">
       <form className="modal-form" onSubmit={handleSubmit}>
@@ -67,7 +71,12 @@ export default function Modal({ currentNote, ...props }) {
         ></textarea>
         <div className="bottom-icons">
           {ICONLIST.map((icon: any) => {
-            return (
+            return icon.name === 'palette' ? (
+              <button key={`modal-icon${icon.name}`} onClick={handleClick}>
+                <Image src={icon.src} alt={icon.name} width={24} height={24} onClick={handlePaletteClick} />
+                {paletteOn && <ColorPalette />}
+              </button>
+            ) : (
               <button key={`modal-icon${icon.name}`} onClick={handleClick}>
                 <Image src={icon.src} alt={icon.name} width={24} height={24} />
               </button>

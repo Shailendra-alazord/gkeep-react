@@ -43,7 +43,11 @@ export default function GridLayout() {
       <div className="grid-layout-container pinned">
         {noteList.map((note: any, key: any) => {
           return note.pinned ? (
-            <pre className={`grid-note-container ${key}`} key={note.title + key + 'grid'}>
+            <pre
+              className={`grid-note-container ${key}`}
+              key={note.title + key + 'grid'}
+              style={{ backgroundColor: note.backgroundColor }}
+            >
               <div className="tick-icon-container">
                 <button className="tick-icon">
                   <Image src={TICKICON.src} alt={TICKICON.name} width={24} height={24} />
@@ -89,7 +93,11 @@ export default function GridLayout() {
       <div className="grid-layout-container others">
         {noteList.map((note: any, key: any) => {
           return !note.pinned ? (
-            <pre className={`grid-note-container ${key}`} key={note.title + key + 'grid'}>
+            <pre
+              className={`grid-note-container ${key}`}
+              key={note.title + key + 'grid'}
+              style={{ backgroundColor: note.backgroundColor }}
+            >
               <div className="tick-icon-container">
                 <button className="tick-icon">
                   <Image src={TICKICON.src} alt={TICKICON.name} width={24} height={24} />

@@ -1,5 +1,7 @@
 'use client';
 import './colorPalette.css';
+import { useContext, useState } from 'react';
+import { NoteColorContext } from '@/Providers/noteColorProvider';
 
 const colorList = [
   { name: 'default', code: '#FFFFFF' },
@@ -14,7 +16,26 @@ const colorList = [
   { name: 'blossom', code: '#f6e2dd' },
 ];
 // @ts-ignore
-export default function ColorPalette({ note, ...props }) {
+export default function ColorPalette({ ...props }) {
+  const [hovered, setHovered] = useState(false);
+  const [currentColor, setCurrentColor] = useState('');
+  // @ts-ignore
+  const [note, setNote] = useContext(NoteColorContext);
+
+  function handleEntry(color: string) {
+    setHovered(true);
+    setCurrentColor(color);
+  }
+
+  function handleExit() {
+    setHovered(false);
+  }
+
+  function handleClick(event: any, color: string) {
+    event.preventDefault();
+    setNote({ ...note, backgroundColor: color });
+  }
+
   return (
     <div className="color-palette">
       {colorList.map((color: any, key: any) => {
@@ -24,10 +45,13 @@ export default function ColorPalette({ note, ...props }) {
             key={'color-' + color.name}
             style={{
               backgroundColor: color.code,
-              border: `${color.name === note.color ? '1px solid #a142f4' : 'none'}`,
+              border: `${color.code === note.backgroundColor ? '2px solid #a142f4' : '1px solid lightgrey'}`,
             }}
+            onMouseEnter={() => handleEntry(color.name)}
+            onMouseLeave={handleExit}
+            onClick={() => handleClick(event, color.code)}
           >
-            {/*<div className="color-modal">{color.name}</div>*/}
+            {hovered && currentColor === color.name && <div className="color-modal">{color.name}</div>}
           </button>
         );
       })}

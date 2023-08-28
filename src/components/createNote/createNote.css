@@ -11,6 +11,7 @@
     margin: 48px auto;
     border-radius: 8px;
     box-shadow: 0 2px 8px grey;
+    background-color: white;
 }
 
 .title-desc-label {
@@ -25,6 +26,7 @@
 .create-note-title {
     flex-grow: 1;
     outline: none;
+    background-color: transparent;
 }
 
 .create-note-desc {
@@ -36,6 +38,7 @@
     /*overflow: ;*/
     width: 100%;
     resize: none;
+    background-color: transparent;
 }
 
 .create-note-desc:focus {
@@ -70,7 +73,7 @@
     margin-bottom: 8px;
 }
 
-.icon-container button {
+.icon-container > button {
     display: flex;
     min-width: 40px;
     justify-content: center;

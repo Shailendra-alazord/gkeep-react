@@ -1,12 +1,16 @@
 .color-palette {
+    position: absolute;
+    margin-top: 80px;
+    margin-left: 260px;
     display: flex;
     align-content: center;
     justify-content: center;
     padding: 8px;
     gap: 4px;
-    border: 1px solid grey;
+    border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     width: fit-content;
+    background-color: white;
 }
 
 .color-palette button {
@@ -18,4 +22,15 @@
 
 .color-palette button:hover {
     border: 1px solid black;
+}
+
+.color-modal {
+    position: absolute;
+    margin-left: -4px;
+    margin-top: 16px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 2px 4px;
+    font-size: small;
+    border-radius: 4px;
 }

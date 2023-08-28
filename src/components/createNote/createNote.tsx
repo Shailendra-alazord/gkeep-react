@@ -14,45 +14,55 @@ import {
 } from '@/utils/constants';
 import { useContext, useState } from 'react';
 import { NoteListContext } from '@/Providers/noteListProvider';
+import ColorPalette from '@/components/colorPalatte/colorPalette';
+import { NoteColorContext } from '@/Providers/noteColorProvider';
 
 const ICONLIST = [ALERTICON, COLLABORATORICON, PALETTEICON, PHOTOICON, MOREICON];
 export default function CreateNote() {
   const [focus, setFocus] = useState(false);
-  const [data, setData] = useState({ title: '', body: '', id: '', pinned: false, backgroundColor: '' });
+  // @ts-ignore
+  const [note, setNote] = useContext(NoteColorContext);
+  const [paletteOn, setPaletteOn] = useState(false);
   // @ts-ignore
   const [noteList, setNoteList] = useContext(NoteListContext);
 
   function handleChange(event: any) {
-    setData({ ...data, title: event.target.value });
+    setNote({ ...note, title: event.target.value });
   }
 
   function handleBodyChange(event: any) {
-    setData({ ...data, body: event.target.value });
+    setNote({ ...note, body: event.target.value });
   }
 
   function handleSubmit(event: any) {
     event.preventDefault();
-    const newData = {
+    const newNote = {
       title: event.target.title.value,
       body: event.target.body.value,
       id: Date.now().toString(),
-      pinned: data.pinned,
+      pinned: note.pinned,
+      backgroundColor: note.backgroundColor,
     };
-    if (newData.title === '' && newData.body === '') {
-      setData({ title: '', body: '', id: '', pinned: true, backgroundColor: '' });
+    if (newNote.title === '' && newNote.body === '') {
+      setNote({ title: '', body: '', id: '', pinned: false, backgroundColor: '#FFFFFF' });
       setFocus(false);
       return;
     }
-    const newNoteList = [newData, ...noteList];
+    const newNoteList = [newNote, ...noteList];
     setNoteList(newNoteList);
     localStorage.setItem('noteList', JSON.stringify(newNoteList));
-    setData({ title: '', body: '', id: '', pinned: true, backgroundColor: '' });
+    setNote({ title: '', body: '', id: '', pinned: false, backgroundColor: '#FFFFFF' });
     setFocus(false);
   }
 
   function handlePinClick(event: any) {
     event.preventDefault();
-    setData({ ...data, pinned: !data.pinned });
+    setNote({ ...note, pinned: !note.pinned });
+  }
+
+  function handleClickPalette(event: any) {
+    event.preventDefault();
+    setPaletteOn(!paletteOn);
   }
 
   function handleClick(event: any) {
@@ -60,7 +70,12 @@ export default function CreateNote() {
   }
 
   return (
-    <form className="create-note-container" onFocus={() => setFocus(true)} onSubmit={handleSubmit}>
+    <form
+      className="create-note-container"
+      onFocus={() => setFocus(true)}
+      onSubmit={handleSubmit}
+      style={{ backgroundColor: note.backgroundColor }}
+    >
       {focus ? (
         <>
           <label className="title-desc-label focused">
@@ -69,11 +84,11 @@ export default function CreateNote() {
               id="title"
               type="text"
               placeholder="Title"
-              value={data.title}
+              value={note.title}
               onChange={handleChange}
             />
             <button className="create-note-pin-icon" onClick={handlePinClick}>
-              {data.pinned ? (
+              {note.pinned ? (
                 <Image src={UNPINICON.src} alt={UNPINICON.name} width={24} height={24} />
               ) : (
                 <Image src={PINICON.src} alt={PINICON.name} width={24} height={24} />
@@ -83,13 +98,18 @@ export default function CreateNote() {
           <textarea
             className="create-note-desc"
             id="body"
-            value={data.body}
+            value={note.body}
             onChange={handleBodyChange}
             placeholder="Take a note..."
           />
           <div className="icon-container">
             {ICONLIST.map((icon: any) => {
-              return (
+              return icon.name === 'palette' ? (
+                <button key={`create-icon${icon.name}`} onClick={handleClick}>
+                  <Image src={icon.src} alt={icon.name} width={20} height={20} onClick={handleClickPalette} />
+                  {paletteOn && <ColorPalette />}
+                </button>
+              ) : (
                 <button key={`create-icon${icon.name}`} onClick={handleClick}>
                   <Image src={icon.src} alt={icon.name} width={20} height={20} />
                 </button>
@@ -105,7 +125,7 @@ export default function CreateNote() {
           <input
             className="create-note-title"
             type="text"
-            value={data.title}
+            value={note.title}
             onChange={handleChange}
             placeholder="Take a note..."
           />
