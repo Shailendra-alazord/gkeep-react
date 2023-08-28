@@ -15,6 +15,7 @@ import {
 } from '@/utils/constants';
 import { DisplayContext } from '@/Providers/DisplayProvider';
 import handlePin from '@/utils/handlePin';
+import filterNoteList from '@/utils/filterNoteList';
 
 // @ts-ignore
 const ICONLIST = [ALERTICON, COLLABORATORICON, PALETTEICON, PHOTOICON];
@@ -22,7 +23,10 @@ export default function ListLayout() {
   // @ts-ignore
   const [noteList, setNoteList] = useContext(NoteListContext);
   // @ts-ignore
-  const [, , , setIsModalOpen, , setModalNote] = useContext(DisplayContext);
+  const { query } = useContext(DisplayContext);
+  const filteredList = filterNoteList(noteList, query);
+  // @ts-ignore
+  const { setIsModalOpen, setModalNote } = useContext(DisplayContext);
 
   function openModal(note: any) {
     setModalNote(note);
@@ -41,7 +45,7 @@ export default function ListLayout() {
     <div className="list-layout">
       <div className="list-layout-container pinned">
         <div>PINNED</div>
-        {noteList.map((note: any, key: any) => {
+        {filteredList.map((note: any, key: any) => {
           return note.pinned ? (
             <pre
               className={`list-note-container ${key}`}
@@ -92,7 +96,7 @@ export default function ListLayout() {
 
       <div className="list-layout-container others">
         <div>OTHERS</div>
-        {noteList.map((note: any, key: any) => {
+        {filteredList.map((note: any, key: any) => {
           return !note.pinned ? (
             <pre
               className={`list-note-container ${key}`}

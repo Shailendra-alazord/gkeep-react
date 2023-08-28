@@ -16,13 +16,17 @@ import { useContext } from 'react';
 import { NoteListContext } from '@/Providers/noteListProvider';
 import { DisplayContext } from '@/Providers/DisplayProvider';
 import handlePin from '@/utils/handlePin';
+import filterNoteList from '@/utils/filterNoteList';
 
 const ICONLIST = [ALERTICON, COLLABORATORICON, PALETTEICON, PHOTOICON];
 export default function GridLayout() {
   // @ts-ignore
   const [noteList, setNoteList] = useContext(NoteListContext);
   // @ts-ignore
-  const [, , , setIsModalOpen, , setModalNote] = useContext(DisplayContext);
+  const { query } = useContext(DisplayContext);
+  const filteredList = filterNoteList(noteList, query);
+  // @ts-ignore
+  const { setIsModalOpen, setModalNote } = useContext(DisplayContext);
 
   function openModal(note: any) {
     setModalNote(note);
@@ -41,7 +45,7 @@ export default function GridLayout() {
     <div className="grid-layout">
       <div className="container-label">PINNED</div>
       <div className="grid-layout-container pinned">
-        {noteList.map((note: any, key: any) => {
+        {filteredList.map((note: any, key: any) => {
           return note.pinned ? (
             <pre
               className={`grid-note-container ${key}`}
@@ -91,7 +95,7 @@ export default function GridLayout() {
       </div>
       <div className="container-label">OTHERS</div>
       <div className="grid-layout-container others">
-        {noteList.map((note: any, key: any) => {
+        {filteredList.map((note: any, key: any) => {
           return !note.pinned ? (
             <pre
               className={`grid-note-container ${key}`}

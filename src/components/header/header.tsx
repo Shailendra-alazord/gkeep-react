@@ -9,10 +9,10 @@ import { DisplayContext } from '@/Providers/DisplayProvider';
 
 export default function Header() {
   // @ts-ignore
-  const [isListLayout, setIsListLayout] = useContext(DisplayContext);
+  const { isListMode, setIsListMode } = useContext(DisplayContext);
 
   function handleClick() {
-    setIsListLayout(!isListLayout);
+    setIsListMode(!isListMode);
   }
 
   return (
@@ -30,7 +30,7 @@ export default function Header() {
       <div className="header-icons-grp">
         {SEARCHBARICONS.map(icon => {
           if (icon.name === 'list') {
-            if (isListLayout) {
+            if (isListMode) {
               return (
                 <button key={icon.name} onClick={handleClick}>
                   <Image src={icon.src} alt={icon.name} width={24} height={24} />

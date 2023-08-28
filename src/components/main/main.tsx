@@ -12,15 +12,15 @@ import NoteColorProvider from '@/Providers/noteColorProvider';
 
 export default function Main() {
   // @ts-ignore
-  const [isListLayout, , isModalOpen] = useContext(DisplayContext);
+  const { isListMode, isModalOpen, isSearchMode } = useContext(DisplayContext);
   // @ts-ignore
   return (
     <NoteListProvider>
       <NoteColorProvider>
         <Header />
         <main className="home">
-          <CreateNote />
-          {isListLayout ? <ListLayout /> : <GridLayout />}
+          {!isSearchMode && <CreateNote />}
+          {isListMode ? <ListLayout /> : <GridLayout />}
           {isModalOpen && <Modal />}
         </main>
       </NoteColorProvider>

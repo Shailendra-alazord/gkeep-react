@@ -23,7 +23,7 @@ export default function ColorPalette({ ...props }) {
   // @ts-ignore
   const [note, setNote] = useContext(NoteColorContext);
   // @ts-ignore
-  const [, , , , modalNote, setModalNote] = useContext(DisplayContext);
+  const { modalNote, setModalNote } = useContext(DisplayContext);
 
   function handleEntry(color: string) {
     setHovered(true);

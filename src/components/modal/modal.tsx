@@ -13,11 +13,11 @@ export default function Modal({ ...props }) {
   // @ts-ignore
   const [noteList, setNoteList] = useContext(NoteListContext);
   // @ts-ignore
-  const [, , , , modalNote, setModalNote] = useContext(DisplayContext);
+  const { modalNote, setModalNote } = useContext(DisplayContext);
   // @ts-ignore
   const [paletteOn, setPaletteOn] = useState(false);
   // @ts-ignore
-  const [, , , seIsModalOpen] = useContext(DisplayContext);
+  const { setIsModalOpen } = useContext(DisplayContext);
 
   function handleChangeTitle(event: any) {
     setModalNote({ ...modalNote, title: event.target.value });
@@ -38,7 +38,7 @@ export default function Modal({ ...props }) {
     setNoteList(noteListCopy);
     localStorage.setItem('noteList', JSON.stringify(noteListCopy));
     setModalNote({ ...modalNote, title: '', body: '' });
-    seIsModalOpen(false);
+    setIsModalOpen(false);
   }
 
   function handlePinClick(event: any) {
